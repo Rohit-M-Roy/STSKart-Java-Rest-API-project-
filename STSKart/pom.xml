@@ -8,11 +8,11 @@
 		<version>2.7.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.shop</groupId>
-	<artifactId>ShoppingApp</artifactId>
+	<groupId>com.Shopping</groupId>
+	<artifactId>STSKart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Shopping Project for Masai</description>
+	<name>STSKart</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -37,25 +37,19 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			
 		</dependency>
 		
-		
-		
-		<!-- Springfox swagger -->
-			<dependency>
+		<dependency>
 		    <groupId>io.springfox</groupId>
 		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>3.0.0</version>
@@ -70,9 +64,6 @@
 		    <artifactId>springfox-boot-starter</artifactId>
 		    <version>3.0.0</version>
 		</dependency>
-		
-		
-		
 		
 	</dependencies>
 
