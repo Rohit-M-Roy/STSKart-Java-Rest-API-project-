@@ -1,6 +1,6 @@
 # SellerToSourceKart
 
-<img src="STSKart Logo.PNG" style="width:50%  height:200px " />
+<img src="STSKart Logo.PNG" style="height: 200px; width: 50%;" />
 # Project Flow
 
 <img src="Scheme Image.PNG" />
