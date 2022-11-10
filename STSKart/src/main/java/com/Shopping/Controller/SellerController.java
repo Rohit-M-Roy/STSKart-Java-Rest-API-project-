@@ -1,4 +1,4 @@
-package com.shopping.controller;
+package com.Shopping.Controller;
 
 import javax.validation.Valid;
 
