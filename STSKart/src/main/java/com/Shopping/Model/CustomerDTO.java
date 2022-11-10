@@ -1,4 +1,4 @@
-package com.shopping.model;
+package com.Shopping.Model;
 
 import javax.validation.constraints.NotNull;
 
