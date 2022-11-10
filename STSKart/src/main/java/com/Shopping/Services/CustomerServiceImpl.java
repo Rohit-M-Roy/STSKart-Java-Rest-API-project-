@@ -1,4 +1,4 @@
-package com.shopping.service;
+package com.Shopping.Service;
 
 import java.util.Optional;
 
