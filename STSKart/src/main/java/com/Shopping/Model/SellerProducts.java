@@ -1,48 +1,46 @@
 package com.shopping.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Address {
+
+public class SellerProducts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer addressId;
+	private Integer productId;
 	
-	private String streetNo;
+	private String productName;
 	
-	private String buildingName;
 	
-	private String city;
+	private double price;
 	
-	private String state;
+	private Integer quantity;
 	
+	private String colour;
 
-	private String country;
+	private String dimension;
+	private String specification;
+	private String manufacutrer;
 	
-	private String pincode;
+	
+	private String category;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
-	private Customer customer;
-	
-//	@JsonIgnore
-//	@OneToOne(cascade = CascadeType.ALL)
-//	private Order order;
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Seller seller ;
 }
