@@ -20,8 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data 
-
+@Data
 public class Customer extends User{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,15 +30,13 @@ public class Customer extends User{
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer")
 	private Address address;
 	
-//	@JsonIgnore
-//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer2")
-//	private Cart cart;
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer",orphanRemoval = true)
 	private List<Order> ordersList = new ArrayList<>() ;
-	
-//	private Map<product, >
+
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer")
+	private Cart cart;
+
 	
 }
 
