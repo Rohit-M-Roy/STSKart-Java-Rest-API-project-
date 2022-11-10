@@ -9,6 +9,5 @@ import com.Shopping.Model.SellerProducts;
 
 public interface CartRepo extends JpaRepository<Cart, Integer>  {
 
-	public Product findByProduct(Integer productId);
 	
 }

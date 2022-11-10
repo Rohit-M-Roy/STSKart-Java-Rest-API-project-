@@ -13,7 +13,7 @@ public interface CartService {
 	public Cart removeproductFromCart(Product product,String key ,Integer cid) throws Exception;
 	
 	
-	public Cart updateProductQuantity(Cart cart, Product product, Integer quantity, String key) throws Exception;
+	public Cart updateProductQuantity(Integer cid, Product product, Integer quantity, String key) throws Exception;
 	
 	
 

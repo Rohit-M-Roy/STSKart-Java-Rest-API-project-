@@ -1,5 +1,6 @@
 package com.Shopping.Services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.mapping.Map;
@@ -20,19 +21,38 @@ public class CartServiceImple implements CartService {
 	@Autowired
 	private CartRepo cartrepo;
 	
+	
+	
 	@Autowired
 	private CustomerRepo crepo;
  
 	@Override
-	public Cart removeproductFromCart(Product product,String key ,Integer cid ) throws Exception {
+	public Cart removeproductFromCart(Product product,String key ,Integer cid ) throws CustomerException {
 		
 		 Optional<Customer> opt = crepo.findById(cid);
 		 
 		 if(opt.isPresent()) {
 			 Customer cur = opt.get();
 			 
-			 
+			 Cart cart_cus= cur.getCart();
 		
+			 List<Product> li= cart_cus.getProductList();
+			 
+			boolean flag=false;
+			 
+			 for(int i=0;i<li.size();i++){
+				 if(li.get(i).getProductId()==product.getProductId()) {
+					 li.remove(product);
+					 flag=true;
+					 break;
+				 }
+			 }
+			 
+			 cart_cus.setProductList(li);
+			 cur.setCart(cart_cus);
+			 crepo.save(cur);
+			 
+			 return cart_cus;
 		 }
 		  
 		  
@@ -41,12 +61,32 @@ public class CartServiceImple implements CartService {
 	}
 
 	@Override
-	public Cart updateProductQuantity(Cart cart, Product product, Integer quantity, String key) throws Exception {
+	public Cart updateProductQuantity(Integer cid, Product product, Integer quantity, String key) throws CustomerException{
 				
-		return null;
+		Optional<Customer> opt = crepo.findById(cid);
 		
-	}
-
-	
-
+		 if(opt.isPresent()) {
+			 Customer cur = opt.get();
+			 
+			 Cart cart_cus= cur.getCart();
+			 List<Product> li= cart_cus.getProductList();
+			 
+				boolean flag=false;
+				 
+				 for(int i=0;i<li.size();i++){
+					 if(li.get(i).getProductId()==product.getProductId()) {
+						 li.get(i).setQuantity(li.get(i).getQuantity()+quantity);
+						 flag=true;
+						 break;
+					 }
+				 }
+		 
+				 cart_cus.setProductList(li);
+				 cur.setCart(cart_cus);
+				 crepo.save(cur);
+		 
+				 return cart_cus;
+		 }
+				 throw new CustomerException("Invalid customerId");
+}
 }

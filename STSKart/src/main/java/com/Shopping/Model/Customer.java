@@ -32,12 +32,12 @@ public class Customer extends User{
 	private Address address;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer2")
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer")
 	private Cart cart;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "customer1",orphanRemoval = true)
-	private List<Order> ordersList = new ArrayList<>() ;
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "customer1",orphanRemoval = true)
+//	private List<Order> ordersList = new ArrayList<>();
 	
 //	private Map<product, >
 	

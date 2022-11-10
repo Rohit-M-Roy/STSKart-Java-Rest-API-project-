@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.Shopping.Exception.CustomerException;
 import com.Shopping.Exception.LoginException;
 import com.Shopping.Model.Address;
+import com.Shopping.Model.Cart;
 import com.Shopping.Model.CurrentUserSession;
 import com.Shopping.Model.Customer;
 import com.Shopping.Model.Product;
@@ -110,13 +111,13 @@ public class CustomerServiceImpl implements CustomerService {
 			if (customer.getCart() == null) {
 				Cart cart = new Cart();
 				customer.setCart(cart);
-				cart.setCustomer2(customer);
+				cart.setCustomer(customer);
 
 				customer.getCart().getProductList().add(p);
 				cr.save(customer);
 			} else {
 				System.out.println("###########################################################################");
-				customer.getCart().setCustomer2(customer);
+				customer.getCart().setCustomer(customer);
 				customer.getCart().getProductList().add(p);
 				cr.save(customer);
 

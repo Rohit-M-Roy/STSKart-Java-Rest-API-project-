@@ -1,5 +1,6 @@
 package com.Shopping.Model;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -10,7 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.Data;
+import lombok.ToString;
+
 @Entity
+@Data
+@ToString
 public class Cart {
 	
 	@Id
@@ -20,32 +26,11 @@ public class Cart {
 	@OneToOne
 	private Customer customer;
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "products")
-	private Map<Product,Integer> products;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Product> ProductList;
 	
 	
-	public Integer getCartId() {
-		return cartId;
-	}
-	public void setCartId(Integer cartId) {
-		this.cartId = cartId;
-	}
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	public Map<Product, Integer> getProducts() {
-		return products;
-	}
-	public void setProducts(Map<Product, Integer> products) {
-		this.products = products;
-	}
-	@Override
-	public String toString() {
-		return "Cart [cartId=" + cartId + "]";
-	}
+	
 	
 	
 	
