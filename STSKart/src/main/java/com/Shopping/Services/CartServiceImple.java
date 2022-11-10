@@ -15,6 +15,8 @@ import com.Shopping.Model.Product;
 import com.Shopping.Repository.CartRepo;
 import com.Shopping.Repository.CustomerRepo;
 
+import lombok.Data;
+
 @Service
 public class CartServiceImple implements CartService {
 	

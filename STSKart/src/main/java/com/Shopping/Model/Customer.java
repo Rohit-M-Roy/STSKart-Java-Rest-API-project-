@@ -20,8 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data 
-
+@Data
 public class Customer extends User{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
