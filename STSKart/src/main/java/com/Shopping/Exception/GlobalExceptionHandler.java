@@ -1,4 +1,4 @@
-package com.shopping.exception;
+package com.Shopping.Exception;
 
 import java.time.LocalDateTime;
 
