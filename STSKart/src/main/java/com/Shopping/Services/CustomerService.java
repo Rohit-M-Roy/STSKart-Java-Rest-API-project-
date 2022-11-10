@@ -1,13 +1,11 @@
-package com.Shopping.Service;
+package com.Shopping.Services;
 
 import org.springframework.stereotype.Service;
 
-import com.shopping.exception.SellerException;
-import com.shopping.exception.CustomerException;
-import com.shopping.model.Address;
-import com.shopping.model.Customer;
-import com.shopping.model.CustomerDTO;
-import com.shopping.model.Product;
+import com.Shopping.Exception.CustomerException;
+import com.Shopping.Model.Address;
+import com.Shopping.Model.Customer;
+
 
 @Service
 public interface CustomerService {
@@ -17,4 +15,7 @@ public interface CustomerService {
 	public Address setTheAddress(Address add,Integer id) throws CustomerException;
 	
 	public String addProduct(Integer i,Integer cusId)throws CustomerException;
+	
+	
+	
 }

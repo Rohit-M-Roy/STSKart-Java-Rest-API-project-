@@ -6,4 +6,5 @@ import com.Shopping.Model.CurrentUserSession;
 
 public interface CurrentUserSessionRepo extends JpaRepository<CurrentUserSession, Integer>{
 
+	public CurrentUserSession findByUuid(String uuid);
 }

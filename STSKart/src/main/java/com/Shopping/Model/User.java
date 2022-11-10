@@ -1,4 +1,4 @@
-package com.shopping.model;
+package com.Shopping.Model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

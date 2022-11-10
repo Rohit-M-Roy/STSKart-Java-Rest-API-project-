@@ -1,4 +1,4 @@
-package com.shopping.model;
+package com.Shopping.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +31,9 @@ public class Customer extends User{
 	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer")
 	private Address address;
 	
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer2")
-	private Cart cart;
+//	@JsonIgnore
+//	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer2")
+//	private Cart cart;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer1",orphanRemoval = true)

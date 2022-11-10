@@ -1,13 +1,14 @@
-package com.Shopping.Service;
+package com.Shopping.Services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.shopping.exception.SellerException;
-import com.shopping.model.Seller;
-import com.shopping.model.SellerProducts;
-import com.shopping.model.Product;
+import com.Shopping.Exception.SellerException;
+import com.Shopping.Model.Seller;
+import com.Shopping.Model.SellerProducts;
+
+
 
 @Service
 public interface AdminService {

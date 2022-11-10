@@ -1,4 +1,4 @@
-package com.Shopping.Service;
+package com.Shopping.Services;
 
 import java.util.Optional;
 
@@ -7,18 +7,16 @@ import javax.crypto.Cipher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shopping.exception.SellerException;
-import com.shopping.exception.CustomerException;
-import com.shopping.model.Address;
-import com.shopping.model.Cart;
-import com.shopping.model.Customer;
-import com.shopping.model.CustomerDTO;
-import com.shopping.model.Product;
-import com.shopping.model.SellerProducts;
-import com.shopping.repository.AddressRepo;
-import com.shopping.repository.CustomerRepo;
-import com.shopping.repository.ProductRepo;
-import com.shopping.repository.SellerProductRepo;
+import com.Shopping.Exception.CustomerException;
+import com.Shopping.Model.Address;
+import com.Shopping.Model.Customer;
+import com.Shopping.Model.Product;
+import com.Shopping.Model.SellerProducts;
+import com.Shopping.Repository.AddressRepo;
+import com.Shopping.Repository.CustomerRepo;
+import com.Shopping.Repository.ProductRepo;
+import com.Shopping.Repository.SellerProductRepo;
+
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -75,9 +73,9 @@ public class CustomerServiceImpl implements CustomerService{
 			
 			p.setProductId(sp.getProductId());
 			p.setCategory(sp.getCategory());
-			p.setColour(sp.getCategory());
+			p.setColor(sp.getCategory());
 			p.setDimension(sp.getDimension());
-			p.setManufacutrer(sp.getManufacutrer());
+			p.setManufacturer(sp.getManufacutrer());
 			p.setPrice(sp.getPrice());
 			p.setProductName(sp.getProductName());
 			p.setQuantity(sp.getQuantity());

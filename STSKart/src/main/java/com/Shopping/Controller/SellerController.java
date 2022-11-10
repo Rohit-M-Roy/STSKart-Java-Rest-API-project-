@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shopping.exception.SellerException;
-import com.shopping.model.Seller;
-import com.shopping.model.SellerProducts;
-import com.shopping.model.Product;
-import com.shopping.service.AdminService;
+import com.Shopping.Exception.SellerException;
+import com.Shopping.Model.Seller;
+import com.Shopping.Model.SellerProducts;
+import com.Shopping.Services.AdminService;
+
 
 
 @RestController

@@ -1,17 +1,17 @@
-package com.Shopping.Service;
+package com.Shopping.Services;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shopping.exception.SellerException;
-import com.shopping.model.Seller;
-import com.shopping.model.SellerProducts;
-import com.shopping.model.Product;
-import com.shopping.repository.AdminRepository;
-import com.shopping.repository.ProductRepo;
-import com.shopping.repository.SellerProductRepo;
+import com.Shopping.Exception.SellerException;
+import com.Shopping.Model.Seller;
+import com.Shopping.Model.SellerProducts;
+import com.Shopping.Repository.AdminRepository;
+import com.Shopping.Repository.ProductRepo;
+import com.Shopping.Repository.SellerProductRepo;
+
 
 @Service
 public class AdminServiceImpl implements AdminService{

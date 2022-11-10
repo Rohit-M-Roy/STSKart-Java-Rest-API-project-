@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shopping.exception.CustomerException;
-import com.shopping.model.Address;
-import com.shopping.model.Cart;
-import com.shopping.model.Customer;
-import com.shopping.service.CustomerService;
+import com.Shopping.Exception.CustomerException;
+import com.Shopping.Model.Address;
+import com.Shopping.Model.Customer;
+import com.Shopping.Services.CustomerService;
+
+
 
 @RestController
 @RequestMapping(value = "/customer")
