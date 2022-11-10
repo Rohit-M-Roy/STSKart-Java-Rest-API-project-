@@ -1,4 +1,4 @@
-package com.shopping.exception;
+package com.Shopping.Exception;
 
 public class CustomerException extends Exception{
 	
