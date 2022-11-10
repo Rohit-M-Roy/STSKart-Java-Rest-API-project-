@@ -36,7 +36,7 @@ public class Customer extends User{
 //	private Cart cart;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "customer1",orphanRemoval = true)
+	@OneToMany(mappedBy = "customer",orphanRemoval = true)
 	private List<Order> ordersList = new ArrayList<>() ;
 	
 //	private Map<product, >
