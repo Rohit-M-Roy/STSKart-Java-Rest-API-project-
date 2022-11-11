@@ -14,11 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-
+@ToString
 public class SellerProducts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

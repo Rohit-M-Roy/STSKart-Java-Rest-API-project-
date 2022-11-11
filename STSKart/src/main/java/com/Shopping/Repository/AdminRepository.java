@@ -11,4 +11,5 @@ public interface AdminRepository extends JpaRepository<Seller	, Integer>{
 	
 	public Seller findByEmailAndPassword(String email,String password);
 	
+	public Seller findByEmail(String email);
 }

@@ -38,9 +38,9 @@ public class Address {
 	
 	private String pincode;
 	
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
-	private Customer customer;
+//	@JsonIgnore
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private Customer customer;
 	
 //	@JsonIgnore
 //	@OneToOne(cascade = CascadeType.ALL)

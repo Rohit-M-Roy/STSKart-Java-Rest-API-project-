@@ -39,7 +39,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer createAccount(Customer cus) throws CustomerException {
-
+		
+		
 		Customer c = cr.save(cus);
 
 		return c;
@@ -68,7 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
 			
 			c.setAddress(add);
 
-			add.setCustomer(c);
+//			add.setCustomer(c);
 
 			Address address = ar.save(add);
 			ar.save(address);
@@ -79,25 +80,24 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public String addProduct(Integer i, Integer cusId, String key) throws CustomerException, LoginException { /// adding																									/// cart
-		Optional<SellerProducts> po = spr.findById(i);
+	public String addProduct(Integer pid, Integer cusId, String key) throws CustomerException, LoginException { /// adding																									/// cart
+		Optional<SellerProducts> po = spr.findById(pid);
 		Customer customer = cr.findByCustomerId(cusId);
 
 		//login----->
-		
+		System.out.println(po.get());
+		System.out.println(cr);
 		CurrentUserSession RunningSession = cusr.findByUuid(key);
 
 		if (RunningSession == null) {
 			throw new LoginException("Please provide a valid key");
 		}
 		
-		
-		
 		if (po.isPresent() && customer != null &&customer.getCustomerId()==RunningSession.getUserId()) {
 
 			SellerProducts sp = po.get();
 			Product p = new Product();
-
+System.out.println("================= Inside add product =====================");
 			p.setProductId(sp.getProductId());
 			p.setCategory(sp.getCategory());
 			p.setColor(sp.getCategory());
@@ -110,18 +110,23 @@ public class CustomerServiceImpl implements CustomerService {
 
 			if (customer.getCart() == null) {
 				Cart cart = new Cart();
+				cart.getProductList().add(p);
 				customer.setCart(cart);
 				cart.setCustomer(customer);
 
-				customer.getCart().getProductList().add(p);
+//				customer.getCart().getProductList().add(p);
 				cr.save(customer);
 			} else {
 				System.out.println("###########################################################################");
-				customer.getCart().setCustomer(customer);
-				customer.getCart().getProductList().add(p);
+//				customer.getCart().setCustomer(customer);
+				
+				Cart c=customer.getCart();
+				c.getProductList().add(p);
+				customer.setCart(c);
+//				customer.getCart().getProductList().add(p);
 				cr.save(customer);
 
-				System.out.println(customer.getCart().getProductList());
+//				System.out.println(customer.getCart().getProductList());
 
 				System.out.println("###########################################################################");
 			}

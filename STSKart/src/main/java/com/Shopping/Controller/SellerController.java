@@ -44,7 +44,7 @@ public class SellerController {
 			
 			return new ResponseEntity<Seller>(adm,HttpStatus.OK);
 		}
-	@PutMapping("/addProductforSell")
+	@PostMapping("/addProductforSell")
 	public ResponseEntity<SellerProducts> addProd(@RequestBody SellerProducts product ,@RequestParam Integer adminId) throws SellerException{
 		SellerProducts pro = ad.addProduct(product,adminId);
 		

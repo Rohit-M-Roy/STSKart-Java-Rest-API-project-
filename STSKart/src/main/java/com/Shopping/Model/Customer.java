@@ -27,23 +27,17 @@ public class Customer extends User{
 	private Integer customerId;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Address address;
 	
 	@JsonIgnore
-<<<<<<< HEAD
-
-=======
->>>>>>> 92dfbfca3b837f0fbbb2c5a02d943572d89b340e
 	@OneToMany(mappedBy = "customer",orphanRemoval = true)
 	private List<Order> ordersList = new ArrayList<>() ;
 
-	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer")
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
 	private Cart cart;
-<<<<<<< HEAD
-	
-=======
->>>>>>> 92dfbfca3b837f0fbbb2c5a02d943572d89b340e
+
 
 	
 }

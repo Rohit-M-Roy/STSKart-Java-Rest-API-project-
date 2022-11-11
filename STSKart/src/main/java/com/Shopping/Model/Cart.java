@@ -1,5 +1,6 @@
 package com.Shopping.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +28,12 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 	
+	
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Product> ProductList;
+	private List<Product> ProductList =new ArrayList<>();
 	
 	
 	

@@ -25,8 +25,9 @@ public class AdminServiceImpl implements AdminService{
 	private AdminRepository ar;
 	@Override
 	public Seller insertAdmin(Seller admin) throws SellerException {
-		Optional<Seller> adm =  ar.findById(admin.getAdminId());
-		if(adm.isPresent()) {
+		Seller adm =  ar.findByEmail(admin.getEmail());
+		
+		if(adm!=null) {
 			throw new SellerException("Admin already Registered");
 		}else {
 				Seller a = ar.save(admin);
