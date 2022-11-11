@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Shopping.Exception.ProductException;
+import com.Shopping.Model.CurrentUserSession;
 import com.Shopping.Model.Product;
 import com.Shopping.Repository.ProductRepo;
 
@@ -13,15 +15,15 @@ import com.Shopping.Repository.ProductRepo;
 public class ProductServicesImpl implements ProductServices{
 
 	@Autowired
-	ProductRepo pRepo;
+	private ProductRepo pRepo;
 	
 	@Override
-	public List<Product> viewAllProducts() {
+	public List<Product> viewAllProducts() throws ProductException {
 		List<Product> allProducts = pRepo.findAll();
 		if(allProducts.size() != 0) {			
 			return allProducts;
 		}
-		else return null;
+		else throw new ProductException("No Products found");
 	}
 
 	@Override
@@ -31,36 +33,32 @@ public class ProductServicesImpl implements ProductServices{
 	}
 
 	@Override
-	public Product updateProduct(Product product) {
+	public Product updateProduct(Product product) throws ProductException {
 		Optional<Product> findProduct = pRepo.findById(product.getProductId());
 		if(findProduct.isPresent()) {
 			Product updatedProduct = pRepo.save(product);
 			return updatedProduct;
 		}
-		else {
-			return null;
-		}
+		else throw new ProductException("Invalid Product Details");
 	}
 
 	@Override
-	public Product viewProduct(Integer productId) {
-		return pRepo.findById(productId).orElseThrow();
+	public Product viewProduct(Integer productId) throws ProductException {
+		return pRepo.findById(productId).orElseThrow(()-> new ProductException("No Product found with this ID: "+productId));
 	}
 
 	@Override
-	public List<Product> viewProductByCategory(String category) {
+	public List<Product> viewProductByCategory(String category) throws ProductException {
 		List<Product> products = pRepo.findByCategory(category);
 		if(products.size() != 0) {
 			return products;
 		}
-		else {
-			return null;
-		}
+		else throw new ProductException("No Products found in this Category: "+category);
 	}
 
 	@Override
-	public Product removeProduct(Integer productId) {
-		Product findProduct = pRepo.findById(productId).orElseThrow();
+	public Product removeProduct(Integer productId) throws ProductException {
+		Product findProduct = pRepo.findById(productId).orElseThrow(()-> new ProductException("No Product found with this ID: "+productId));
 		pRepo.delete(findProduct);
 		return findProduct;
 	}
