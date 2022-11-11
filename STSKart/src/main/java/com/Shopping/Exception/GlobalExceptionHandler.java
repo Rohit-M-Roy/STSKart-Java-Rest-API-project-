@@ -42,7 +42,14 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
 	}
 	
-	
+	@ExceptionHandler(ProductException.class)
+	public ResponseEntity<MyErrorDetails> ProductException(ProductException e,WebRequest req){
+		MyErrorDetails err = new MyErrorDetails();
+		err.setDescription(req.getDescription(false));
+		err.setLdt(LocalDateTime.now());
+		err.setMessage(e.getMessage());
+		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<MyErrorDetails> normalException(Exception e,WebRequest req){
