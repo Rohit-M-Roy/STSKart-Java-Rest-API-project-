@@ -9,7 +9,7 @@ public interface OrderService {
 	
 	public Order addOrder(Order order);
 	
-	public Order updateOrder(Order order);
+	public Order updateOrder(Order updateOrder);
 	
 	public Order removeOrder(Order order);
 	
