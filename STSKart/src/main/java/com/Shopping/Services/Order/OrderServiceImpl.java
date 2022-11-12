@@ -51,8 +51,20 @@ public class OrderServiceImpl implements OrderService{
 		//fetched cart from customer takes in the products list and injects it in the order list
 		order.setCustomer(fetchedCustomerDb);
 		List<Product> product_list = fetchedCustomerDb.getCart().getProductList();
-		order.setListOfProducts(product_list);
+		
+		List<Product> newProductList = new ArrayList<>();
+		
+		for(Product ele : product_list) {
+			
+			newProductList.add(ele);
+			
+		}
+		
+		order.setListOfProducts(newProductList);
+		
+		cart_repo.delete(fetchedCustomerDb.getCart());
 		order_repository.save(order);
+		
 		fetchedCustomerDb.getOrdersList().add(order);
 		
 		

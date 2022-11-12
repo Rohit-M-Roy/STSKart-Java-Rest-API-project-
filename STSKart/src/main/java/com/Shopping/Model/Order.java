@@ -37,6 +37,6 @@ public class Order {
 	private Customer customer;
 	
 	@JsonIgnore
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Product> listOfProducts = new ArrayList<>();
 }

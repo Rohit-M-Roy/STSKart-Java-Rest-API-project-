@@ -58,6 +58,10 @@ public class Product {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Cart cart;
 	
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Order order;
+	
 	
 
 }
