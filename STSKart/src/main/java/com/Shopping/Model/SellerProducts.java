@@ -42,6 +42,6 @@ public class SellerProducts {
 	private String category;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Seller seller ;
 }

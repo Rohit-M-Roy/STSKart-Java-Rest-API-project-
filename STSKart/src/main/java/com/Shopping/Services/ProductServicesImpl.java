@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import com.Shopping.Exception.ProductException;
 import com.Shopping.Model.CurrentUserSession;
 import com.Shopping.Model.Product;
+import com.Shopping.Model.SellerProducts;
+import com.Shopping.Repository.AdminRepository;
 import com.Shopping.Repository.ProductRepo;
+import com.Shopping.Repository.SellerProductRepo;
 
 @Service
 public class ProductServicesImpl implements ProductServices{
@@ -17,9 +20,15 @@ public class ProductServicesImpl implements ProductServices{
 	@Autowired
 	private ProductRepo pRepo;
 	
+	@Autowired
+	private SellerProductRepo sellerProductRepo;
+	
+	@Autowired
+	private AdminRepository adminRepository;
+	
 	@Override
-	public List<Product> viewAllProducts() throws ProductException {
-		List<Product> allProducts = pRepo.findAll();
+	public List<SellerProducts> viewAllProducts() throws ProductException {
+		List<SellerProducts> allProducts = sellerProductRepo.findAll();
 		if(allProducts.size() != 0) {			
 			return allProducts;
 		}
@@ -27,29 +36,24 @@ public class ProductServicesImpl implements ProductServices{
 	}
 
 	@Override
-	public Product addProduct(Product product) {
-		Product saveProduct = pRepo.save(product);
-		return saveProduct;
-	}
-
-	@Override
-	public Product updateProduct(Product product) throws ProductException {
-		Optional<Product> findProduct = pRepo.findById(product.getProductId());
+	public SellerProducts updateProduct(SellerProducts product, Integer sid) throws ProductException {
+		Optional<SellerProducts> findProduct = sellerProductRepo.findById(product.getProductId());
 		if(findProduct.isPresent()) {
-			Product updatedProduct = pRepo.save(product);
+			product.setSeller(adminRepository.findById(sid).get());
+			SellerProducts updatedProduct = sellerProductRepo.save(product);
 			return updatedProduct;
 		}
 		else throw new ProductException("Invalid Product Details");
 	}
 
 	@Override
-	public Product viewProduct(Integer productId) throws ProductException {
-		return pRepo.findById(productId).orElseThrow(()-> new ProductException("No Product found with this ID: "+productId));
+	public SellerProducts viewProduct(Integer productId) throws ProductException {
+		return sellerProductRepo.findById(productId).orElseThrow(()-> new ProductException("No Product found with this ID: "+productId));
 	}
 
 	@Override
-	public List<Product> viewProductByCategory(String category) throws ProductException {
-		List<Product> products = pRepo.findByCategory(category);
+	public List<SellerProducts> viewProductByCategory(String category) throws ProductException {
+		List<SellerProducts> products = sellerProductRepo.findByCategory(category);
 		if(products.size() != 0) {
 			return products;
 		}
@@ -57,10 +61,16 @@ public class ProductServicesImpl implements ProductServices{
 	}
 
 	@Override
-	public Product removeProduct(Integer productId) throws ProductException {
-		Product findProduct = pRepo.findById(productId).orElseThrow(()-> new ProductException("No Product found with this ID: "+productId));
-		pRepo.delete(findProduct);
-		return findProduct;
+	public SellerProducts removeProduct(Integer productId) throws ProductException {
+		Optional<SellerProducts> findOptional = sellerProductRepo.findById(productId);
+		if(findOptional.isPresent()) {
+			SellerProducts sProducts = sellerProductRepo.getById(productId);
+			sellerProductRepo.delete(sProducts);
+			return sProducts;
+		}
+		else {
+			throw new ProductException("No Products found with ID: "+productId);
+		}
 	}
 
 }
