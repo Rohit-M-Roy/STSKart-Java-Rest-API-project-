@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,17 +23,17 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToOne
 	private Customer customer;
 	
-	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Product> ProductList =new ArrayList<>();
 	

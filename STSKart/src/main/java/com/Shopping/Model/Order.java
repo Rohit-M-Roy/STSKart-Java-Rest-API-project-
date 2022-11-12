@@ -37,6 +37,10 @@ public class Order {
 	private Customer customer;
 	
 	@JsonIgnore
+<<<<<<< HEAD
 	@OneToMany
+=======
+	@OneToMany(cascade = CascadeType.ALL)
+>>>>>>> 799d820c1fd94b77f4f8b3d6799cc5f0b525cab7
 	private List<Product> listOfProducts = new ArrayList<>();
 }

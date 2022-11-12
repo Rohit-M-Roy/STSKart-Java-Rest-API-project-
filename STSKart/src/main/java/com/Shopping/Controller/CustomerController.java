@@ -40,11 +40,4 @@ public class CustomerController {
 		return new ResponseEntity<>(ad, HttpStatus.OK);
 	}
 
-	@PostMapping("/addToCart")
-	public ResponseEntity<String> addProductToCart(@RequestParam Integer productId, @RequestParam Integer customerId,
-			@RequestParam String key) throws CustomerException, LoginException {
-		String x = cs.addProduct(productId, customerId, key);
-		return new ResponseEntity<String>(x, HttpStatus.OK);
-	}
-
 }
