@@ -8,6 +8,6 @@ import com.Shopping.Model.Order;
 @Repository
 public interface OrderRepo extends JpaRepository<Order, Integer>{
 	
-	public List<Order> findBy
+	
 
 }

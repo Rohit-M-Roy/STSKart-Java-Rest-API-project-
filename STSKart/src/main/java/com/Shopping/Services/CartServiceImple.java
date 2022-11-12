@@ -81,7 +81,7 @@ public class CartServiceImple implements CartService {
 	
 
 	@Override
-	public Cart updateProductQuantity(Integer cid, Product product, Integer quantity, String key) throws CustomerException{
+	public Product updateProductQuantity(Integer cid, Integer pid, Integer quantity, String key) throws CustomerException{
 				
 		Optional<Customer> opt = crepo.findById(cid);
 		
@@ -92,10 +92,13 @@ public class CartServiceImple implements CartService {
 			 List<Product> li= cart_cus.getProductList();
 			 
 				boolean flag=false;
-				 
+				
+				Product p=null;
+				
 				 for(int i=0;i<li.size();i++){
-					 if(li.get(i).getProductId()==product.getProductId()) {
+					 if(li.get(i).getProductId()==pid) {
 						 li.get(i).setQuantity(li.get(i).getQuantity()+quantity);
+						 p=li.get(i);
 						 flag=true;
 						 break;
 					 }
@@ -106,7 +109,7 @@ public class CartServiceImple implements CartService {
 				 cur.setCart(cart_cus);
 				 crepo.save(cur);
 		 
-				 return cart_cus;
+				 return p;
 		 }
 				 throw new CustomerException("Invalid customerId");
 }

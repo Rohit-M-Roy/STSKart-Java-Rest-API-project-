@@ -41,4 +41,12 @@ public class CartController {
 		return new ResponseEntity<Product>(c,HttpStatus.ACCEPTED);
 	}
 
+	@PutMapping("/updateQuantity")
+	public ResponseEntity<Product> UpdateProductQuantity(@RequestParam Integer cid,@RequestParam Integer pid,@RequestParam Integer quantity,@RequestParam String key) throws Exception{
+		
+		Product c= cartservice.updateProductQuantity(cid, pid, quantity, key);
+		
+		return new ResponseEntity<Product>(c,HttpStatus.ACCEPTED);
+	}
+	
 }
