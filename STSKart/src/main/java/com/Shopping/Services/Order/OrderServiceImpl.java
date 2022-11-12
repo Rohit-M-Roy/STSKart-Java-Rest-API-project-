@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.jaxb.SpringDataJaxb.OrderDto;
 import org.springframework.stereotype.Service;
 
 import com.Shopping.Exception.CustomerException;
@@ -13,6 +14,7 @@ import com.Shopping.Exception.OrderException;
 import com.Shopping.Model.CurrentUserSession;
 import com.Shopping.Model.Customer;
 import com.Shopping.Model.Order;
+import com.Shopping.Model.OrderDTO;
 import com.Shopping.Model.Product;
 import com.Shopping.Repository.CartRepo;
 import com.Shopping.Repository.CurrentUserSessionRepo;
@@ -116,9 +118,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Order removeOrder(Order order) throws OrderException, CustomerException{
+	public Order removeOrder(Integer orderId) throws OrderException, CustomerException{
 		
-		Order fetchedOrderFromDb = order_repository.findById(order.getOrderId()).orElseThrow(()-> new OrderException("No such order int the database"));
+		Order fetchedOrderFromDb = order_repository.findById(orderId).orElseThrow(()-> new OrderException("No such order int the database"));
 		//throw error if not found in db
 		
 		//throw error if customer order mismatch
@@ -130,15 +132,16 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public Order viewOrder(Order order) throws OrderException{
+	public OrderDTO viewOrder(Integer orderId) throws OrderException{
 		// TODO Auto-generated method stub
 		
-		Order fetchedOrder = order_repository.findById(order.getOrderId()).orElseThrow(()-> new OrderException("No such order exists in the Database"));
+		Order fetchedOrder = order_repository.findById(orderId).orElseThrow(()-> new OrderException("No such order exists in the Database"));
 		//throw error no  such order in cart;
 		
+		OrderDTO orderDto = new OrderDTO(fetchedOrder.getOrderId(),fetchedOrder.getOrderDate(),fetchedOrder.getOrderStatus(),fetchedOrder.getCustomer().getCustomerId(),fetchedOrder.getCustomer().getAddress(),fetchedOrder.getListOfProducts());
 		
 		
-		return order;
+		return orderDto;
 	}
 
 	@Override
@@ -162,13 +165,13 @@ public class OrderServiceImpl implements OrderService{
 		return OrderListByDate;
 	}
 
-	@Override
-	public List<Order> viewAllOrdersByLocation(String loc) {
-		
-		// need some clarification.
-		
-		return null;
-	}
+//	@Override
+//	public List<Order> viewAllOrdersByLocation(String loc) {
+//		
+//		// need some clarification.
+//		
+//		return null;
+//	}
 
 	@Override
 	public List<Order> viewAllOrdersByUserId(Integer userid) throws CustomerException{
