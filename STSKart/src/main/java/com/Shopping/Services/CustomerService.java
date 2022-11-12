@@ -15,7 +15,6 @@ public interface CustomerService {
 	
 	public Address setTheAddress(Address add,Integer id,String key) throws CustomerException,LoginException;
 	
-	public String addProduct(Integer i,Integer cusId,String key)throws CustomerException,LoginException;
 	
 	public Customer updatecustomer(Customer customer,String key)throws LoginException,CustomerException;
 	

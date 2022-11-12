@@ -80,67 +80,6 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public String addProduct(Integer pid, Integer cusId, String key) throws CustomerException, LoginException { /// adding																									/// cart
-		Optional<SellerProducts> po = spr.findById(pid);
-		Customer customer = cr.findByCustomerId(cusId);
-
-		//login----->
-		System.out.println(po.get());
-		System.out.println(cr);
-		CurrentUserSession RunningSession = cusr.findByUuid(key);
-
-		if (RunningSession == null) {
-			throw new LoginException("Please provide a valid key");
-		}
-		
-		if (po.isPresent() && customer != null &&customer.getCustomerId()==RunningSession.getUserId()) {
-
-			SellerProducts sp = po.get();
-			Product p = new Product();
-System.out.println("================= Inside add product =====================");
-			p.setProductId(sp.getProductId());
-			p.setCategory(sp.getCategory());
-			p.setColor(sp.getCategory());
-			p.setDimension(sp.getDimension());
-			p.setManufacturer(sp.getManufacutrer());
-			p.setPrice(sp.getPrice());
-			p.setProductName(sp.getProductName());
-			p.setQuantity(sp.getQuantity());
-			p.setSpecification(sp.getSpecification());
-
-			if (customer.getCart() == null) {
-				Cart cart = new Cart();
-				cart.getProductList().add(p);
-				customer.setCart(cart);
-				cart.setCustomer(customer);
-
-//				customer.getCart().getProductList().add(p);
-				cr.save(customer);
-			} else {
-				System.out.println("###########################################################################");
-//				customer.getCart().setCustomer(customer);
-				
-				Cart c=customer.getCart();
-				c.getProductList().add(p);
-				customer.setCart(c);
-//				customer.getCart().getProductList().add(p);
-				cr.save(customer);
-
-//				System.out.println(customer.getCart().getProductList());
-
-				System.out.println("###########################################################################");
-			}
-
-			return "Added to Cart ";
-		}
-		if(customer.getCustomerId()!=RunningSession.getUserId()) {
-			throw new CustomerException("Please login first");
-		}
-
-		return "Not Found";
-	}
-
-	@Override
 	public Customer updatecustomer(Customer customer, String key) throws LoginException, CustomerException {
 
 		CurrentUserSession RunningSession = cusr.findByUuid(key);

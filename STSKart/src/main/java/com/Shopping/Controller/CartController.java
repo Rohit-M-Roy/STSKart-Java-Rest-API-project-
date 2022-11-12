@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Shopping.Exception.CustomerException;
 import com.Shopping.Model.Cart;
 import com.Shopping.Model.Product;
 import com.Shopping.Services.CartService;
@@ -21,12 +23,22 @@ public class CartController {
 	private CartService cartservice;
 	
 	
-	@PutMapping("/removeProduct/")
-	public ResponseEntity<Cart> removeProductFromCart(@RequestBody Product product, String key, Integer cid){
+	@PutMapping("/addProductToCart")
+	public ResponseEntity<String> AddProductToCart(@RequestParam Integer pid,@RequestParam Integer custid,@RequestParam String key) throws CustomerException{
 		
-//		cartservice.removeproductFromCart(product, cid , key);
+		String s= cartservice.addProductToCart(pid, custid, key);
 		
-		return new ResponseEntity<Cart>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>(s,HttpStatus.ACCEPTED);
+		
+	}
+	
+	
+	@PutMapping("/removeProduct")
+	public ResponseEntity<Product> removeProductFromCart(@RequestParam Integer pid,@RequestParam String key,@RequestParam Integer cid) throws Exception{
+		
+		Product c= cartservice.removeproductFromCart(pid, key, cid);
+		
+		return new ResponseEntity<Product>(c,HttpStatus.ACCEPTED);
 	}
 
 }

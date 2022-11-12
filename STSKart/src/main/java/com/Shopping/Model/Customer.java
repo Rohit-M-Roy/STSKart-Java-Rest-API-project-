@@ -35,7 +35,7 @@ public class Customer extends User{
 	private List<Order> ordersList = new ArrayList<>() ;
 
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL,mappedBy = "customer")
 	private Cart cart;
 
 
