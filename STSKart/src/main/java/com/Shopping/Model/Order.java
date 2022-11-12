@@ -38,9 +38,13 @@ public class Order {
 	
 	@JsonIgnore
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@OneToMany
 =======
 	@OneToMany(cascade = CascadeType.ALL)
 >>>>>>> 799d820c1fd94b77f4f8b3d6799cc5f0b525cab7
+=======
+	@OneToMany
+>>>>>>> 1ba71ead55f54951dae3fabfbb0c43b457125df2
 	private List<Product> listOfProducts = new ArrayList<>();
 }
