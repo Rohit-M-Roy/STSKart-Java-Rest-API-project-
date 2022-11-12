@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -35,6 +36,15 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(CartException.class)
 	public ResponseEntity<MyErrorDetails> CartException(CartException e,WebRequest req){
+		MyErrorDetails err = new MyErrorDetails();
+		err.setDescription(req.getDescription(false));
+		err.setLdt(LocalDateTime.now());
+		err.setMessage(e.getMessage());
+		return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(OrderException.class)
+	public ResponseEntity<MyErrorDetails> CustomerException(OrderException e,WebRequest req){
 		MyErrorDetails err = new MyErrorDetails();
 		err.setDescription(req.getDescription(false));
 		err.setLdt(LocalDateTime.now());
