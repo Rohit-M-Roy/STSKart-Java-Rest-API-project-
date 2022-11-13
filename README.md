@@ -3,4 +3,4 @@
 
 # Project Flow
 
-<img src="Scheme Image.PNG" />
+<img src="STSKart.png" />
