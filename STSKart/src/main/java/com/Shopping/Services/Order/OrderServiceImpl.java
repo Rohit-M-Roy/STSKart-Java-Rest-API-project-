@@ -20,6 +20,9 @@ import com.Shopping.Repository.CartRepo;
 import com.Shopping.Repository.CurrentUserSessionRepo;
 import com.Shopping.Repository.CustomerRepo;
 import com.Shopping.Repository.OrderRepo;
+import com.Shopping.Repository.ProductRepo;
+import com.Shopping.Services.CartService;
+import com.Shopping.Services.CartServiceImple;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -36,6 +39,9 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	CartRepo cart_repo;
 	
+	@Autowired
+	private ProductRepo prepo;
+	
 	@Override
 	public Order addOrder(Order order, String key)throws CustomerException,LoginException{
 		
@@ -51,26 +57,26 @@ public class OrderServiceImpl implements OrderService{
 		Customer fetchedCustomerDb = customer_repository.findById(customerId).orElseThrow(()-> new CustomerException("No such customer with the given id exists in the database"));
 		
 		//fetched cart from customer takes in the products list and injects it in the order list
-		order.setCustomer(fetchedCustomerDb);
+		
 		List<Product> product_list = fetchedCustomerDb.getCart().getProductList();
 		
 		List<Product> newProductList = new ArrayList<>();
 		
 		for(Product ele : product_list) {
 			
+			ele.setCart(null);
+						
 			newProductList.add(ele);
-			
 		}
 		
 		order.setListOfProducts(newProductList);
-		
-		cart_repo.delete(fetchedCustomerDb.getCart());
-		order_repository.save(order);
-		
+		order.setCustomer(fetchedCustomerDb);
+		fetchedCustomerDb.getCart().setProductList(new ArrayList<>());
 		fetchedCustomerDb.getOrdersList().add(order);
+		Order ord= order_repository.save(order);
 		
-		
-		return order;
+		customer_repository.save(fetchedCustomerDb);
+		return ord;
 	}
 	
 	public Customer loginValidation(String key) throws LoginException,CustomerException{
@@ -107,6 +113,7 @@ public class OrderServiceImpl implements OrderService{
 				
 				orderEle.setOrderStatus(updateOrder.getOrderStatus());
 				orderEle.setListOfProducts(updateOrder.getListOfProducts());
+				orderEle.setCustomer(fetchedCustomerDb);
 				break;
 			}
 			

@@ -33,7 +33,7 @@ public class Order {
 	private String orderStatus;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Customer customer;
 	
 	@JsonIgnore

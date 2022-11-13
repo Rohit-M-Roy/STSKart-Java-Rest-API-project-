@@ -79,7 +79,7 @@ public class OrderController {
 	
 	
 	@GetMapping("/viewByUserId/{id}")
-	public ResponseEntity<List<Order>> viewAllOrderByUserId(@PathVariable Integer userId) throws CustomerException{
+	public ResponseEntity<List<Order>> viewAllOrderByUserId(@PathVariable("id") Integer userId) throws CustomerException{
 		
 		List<Order> orderByUserId = order_service.viewAllOrdersByUserId(userId);
 		
