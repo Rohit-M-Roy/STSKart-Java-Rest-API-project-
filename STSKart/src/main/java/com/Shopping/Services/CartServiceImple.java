@@ -11,11 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.Shopping.Exception.CartException;
 import com.Shopping.Exception.CustomerException;
+import com.Shopping.Exception.LoginException;
 import com.Shopping.Model.Cart;
+import com.Shopping.Model.CurrentUserSession;
 import com.Shopping.Model.Customer;
 import com.Shopping.Model.Product;
 import com.Shopping.Model.SellerProducts;
 import com.Shopping.Repository.CartRepo;
+import com.Shopping.Repository.CurrentUserSessionRepo;
 import com.Shopping.Repository.CustomerRepo;
 import com.Shopping.Repository.ProductRepo;
 import com.Shopping.Repository.SellerProductRepo;
@@ -37,10 +40,28 @@ public class CartServiceImple implements CartService {
 	@Autowired
 	private SellerProductRepo spr;
 	
+	@Autowired
+	private CurrentUserSessionRepo cusr;
+	
 	@Override
-	public Product removeproductFromCart(Integer pid,String key ,Integer cid ) throws CustomerException {
+	public Product removeproductFromCart(Integer pid,String key ,Integer cid ) throws CustomerException, LoginException {
 		
 		 Optional<Customer> opt = crepo.findById(cid);
+		 
+//		 login part--->
+		 
+		 if(opt.isEmpty()) throw new CustomerException("Customer Not found");
+		  
+		  CurrentUserSession RunningSession = cusr.findByUuid(key);
+
+			if (RunningSession == null) {
+				throw new LoginException("Please provide a valid key");
+			}
+			
+			if(RunningSession.getUserId()!=opt.get().getCustomerId()) {
+				throw new LoginException("Please Login First");
+			}
+//		 <-----Login End
 		 
 		 if(opt.isPresent()) {
 			
@@ -61,6 +82,7 @@ public class CartServiceImple implements CartService {
 			 }
 			 
 			 cart_cus.setProductList(li);
+//			 cartrepo.save(cart_cus);
 			 
 			Optional<Product> optp= prepo.findById(pid);
 			if(optp.isPresent()) {
@@ -81,9 +103,24 @@ public class CartServiceImple implements CartService {
 	
 
 	@Override
-	public Product updateProductQuantity(Integer cid, Integer pid, Integer quantity, String key) throws CustomerException{
+	public Product updateProductQuantity(Integer cid, Integer pid, Integer quantity, String key) throws CustomerException, LoginException{
 				
 		Optional<Customer> opt = crepo.findById(cid);
+		
+		if(!opt.isPresent()) throw new CustomerException("Customer Not found");
+		  
+		  CurrentUserSession RunningSession = cusr.findByUuid(key);
+
+			if (RunningSession == null) {
+				throw new LoginException("Please provide a valid key");
+			}
+			
+			if(RunningSession.getUserId()!=opt.get().getCustomerId()) {
+				throw new LoginException("Please Login First");
+			}
+		
+		
+		
 		
 		 if(opt.isPresent()) {
 			 Customer cur = opt.get();
@@ -115,11 +152,23 @@ public class CartServiceImple implements CartService {
 }
 
 	@Override
-	public String addProductToCart(Integer pid, Integer cusId, String key) throws CustomerException {
+	public String addProductToCart(Integer pid, Integer cusId, String key) throws CustomerException, LoginException {
 		
 		Optional<SellerProducts> Spopt= spr.findById(pid);
 		
 		  Customer customer= crepo.findByCustomerId(cusId);
+		  
+		  if(customer==null) throw new CustomerException("Customer Not found");
+		  
+		  CurrentUserSession RunningSession = cusr.findByUuid(key);
+
+			if (RunningSession == null) {
+				throw new LoginException("Please provide a valid key");
+			}
+			
+			if(RunningSession.getUserId()!=customer.getCustomerId()) {
+				throw new LoginException("Please Login First");
+			}
 		  
 		  if(Spopt.isPresent()&&customer!=null) {
 			  

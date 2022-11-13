@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Shopping.Exception.CustomerException;
+import com.Shopping.Exception.LoginException;
 import com.Shopping.Model.Cart;
 import com.Shopping.Model.Product;
 import com.Shopping.Services.CartService;
@@ -24,7 +25,7 @@ public class CartController {
 	
 	
 	@PutMapping("/addProductToCart")
-	public ResponseEntity<String> AddProductToCart(@RequestParam Integer pid,@RequestParam Integer custid,@RequestParam String key) throws CustomerException{
+	public ResponseEntity<String> AddProductToCart(@RequestParam Integer pid,@RequestParam Integer custid,@RequestParam String key) throws CustomerException, LoginException{
 		
 		String s= cartservice.addProductToCart(pid, custid, key);
 		

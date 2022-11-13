@@ -55,7 +55,8 @@ public class Product {
 	private String category;
 	
 	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+//	(cascade = CascadeType.ALL)
 	private Cart cart;
 	
 	@JsonIgnore
