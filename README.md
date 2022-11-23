@@ -13,9 +13,6 @@
 <h1>Deployed Link</h1>
 <ul><li><a href="http://onlineshop-env.eba-cxymjmdv.ap-northeast-1.elasticbeanstalk.com/swagger-ui/">Live Project Link</a></li></ul>
 
-
-
-
 # Project Schema Plan
 
 <img src="STSKart.png" />
