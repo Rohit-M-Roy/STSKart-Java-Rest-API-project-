@@ -1,6 +1,6 @@
 
-<h1 align="center">Hi 👋, I'm Yash Bhatter</h1>
-<h2 align="center">A Passionate Java Backend Developer with hands-on experience in designing, developing projects. Adept at learning, unlearning, and relearning.</h2>
+<h1 align="center">SellerToCart</h1>
+<h2 align="center">A Backend project providing Rest Api for online shopping application. The Api can perform all the crud operation with customer validation on every step.</h2>
 
 
 
