@@ -10,7 +10,7 @@
   <li><h3>Order Module</h3></li>
   <li><h3>Cart Module</h3></li>
 </ul>
-<h1>Deployed Link</h1>
+<h1>Deployed Video Link</h1>
 <ul><li><a target="_blank" href="https://drive.google.com/file/d/17o2alq8DNX1q7yQvpWKVQwQ5uvEYu7OQ/view?usp=sharing">Live Project Video Link</a></li></ul>
 
 # Project Schema Plan
