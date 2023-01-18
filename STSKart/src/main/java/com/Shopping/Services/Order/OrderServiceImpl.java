@@ -103,23 +103,22 @@ public class OrderServiceImpl implements OrderService{
 		
 		
 		//check with db if that customer exists in database;
-		Customer fetchedCustomerDb = customer_repository.findById(fetchedCustomerFromKey.getCustomerId()).orElseThrow(()-> new CustomerException("No such customer with the given id exists in the database"));
+//		Customer fetchedCustomerDb = customer_repository.findById(fetchedCustomerFromKey.getCustomerId()).orElseThrow(()-> new CustomerException("No such customer with the given id exists in the database"));
 		
 		List<Order> listOfOrders = fetchedCustomerFromKey.getOrdersList();
 		
 		for(Order orderEle : listOfOrders) {
 			
-			if(orderEle.getOrderId() == updateOrder.getOrderId()) {
+			if(orderEle.getOrderId() == fetchedOrderDb.getOrderId()) {
 				
 				orderEle.setOrderStatus(updateOrder.getOrderStatus());
-				orderEle.setListOfProducts(updateOrder.getListOfProducts());
-				orderEle.setCustomer(fetchedCustomerDb);
+				order_repository.save(orderEle);
 				break;
 			}
 			
 		}
 		
-		order_repository.save(updateOrder);
+//		order_repository.save(updateOrder);
 		
 		return updateOrder;
 	}
@@ -151,7 +150,7 @@ public class OrderServiceImpl implements OrderService{
 		return orderDto;
 	}
 
-	@Override
+	
 	public List<Order> viewAllOrders(LocalDate date) throws OrderException{
 		
 		List<Order> listOfOrder = order_repository.findAll();
