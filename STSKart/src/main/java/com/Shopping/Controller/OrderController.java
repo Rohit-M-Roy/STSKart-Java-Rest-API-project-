@@ -66,15 +66,14 @@ public class OrderController {
 		
 	}
 	
-	@GetMapping("viewByDate")
-	public ResponseEntity<List<Order>> viewAllOrderByDate(@RequestBody LocalDate date)throws OrderException{
-		
-		List<Order> orderByDate = order_service.viewAllOrders(date);
-		
-		return new ResponseEntity<>(orderByDate,HttpStatus.ACCEPTED);
-		
-	}
-	
+//	@GetMapping("/viewByDate/{date}")
+//	public ResponseEntity<List<Order>> viewAllOrderByDate(@PathVariable("date") LocalDate date)throws OrderException{
+//		
+//		List<Order> orderByDate = order_service.viewAllOrders(date);
+//		
+//		return new ResponseEntity<>(orderByDate,HttpStatus.ACCEPTED);
+//		
+//	}
 
 	
 	

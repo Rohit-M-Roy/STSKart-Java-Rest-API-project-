@@ -19,10 +19,6 @@ public interface OrderService {
 	
 	public OrderDTO viewOrder(Integer orderId) throws OrderException;
 	
-	public List<Order> viewAllOrders(LocalDate date) throws OrderException;
-	
-//	public List<Order> viewAllOrdersByLocation(String loc);
-	
 	public List<Order> viewAllOrdersByUserId(Integer userid)throws CustomerException;
 	
 
